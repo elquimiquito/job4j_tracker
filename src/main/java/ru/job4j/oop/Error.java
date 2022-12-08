@@ -4,6 +4,7 @@ public class Error {
     private boolean active;
     private int status;
     private String message;
+
     public Error() {
         active = false;
         status = 250;
@@ -27,7 +28,7 @@ public class Error {
         task1.printInfo();
         Error task2 = new Error(true, 125, "Ошибок нет");
         task2.printInfo();
-        Error task3 = new Error(false,0,"Все очень плохо");
+        Error task3 = new Error(false, 0, "Все очень плохо");
         task3.printInfo();
     }
 }
