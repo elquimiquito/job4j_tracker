@@ -5,10 +5,8 @@ public class Error {
     private int status;
     private String message;
 
+
     public Error() {
-        active = false;
-        status = 250;
-        message = "Ошибка в 34-ой строке";
     }
 
     public Error(boolean active, int status, String message) {
