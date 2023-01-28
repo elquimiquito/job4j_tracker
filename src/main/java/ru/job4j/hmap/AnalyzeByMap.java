@@ -67,13 +67,9 @@ public class AnalyzeByMap {
         Map<String, Integer> scores = new LinkedHashMap<>();
         for (Pupil pupil : pupils) {
             for (Subject subject : pupil.subjects()) {
-                if (scores.get(subject.name()) == null) {
-                    scores.put(subject.name(), subject.score());
-                } else {
-                    scores.put(subject.name(), scores.get(subject.name()) + subject.score());
-                }
-            }
+                scores.put(subject.name(), scores.getOrDefault(subject.name(), 0) + subject.score());
         }
+    }
         for (String name : scores.keySet()) {
             labels.add(new Label(name,  scores.get(name)));
         }
