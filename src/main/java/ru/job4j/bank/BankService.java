@@ -3,10 +3,7 @@ package ru.job4j.bank;
 import ru.job4j.bank.Account;
 import ru.job4j.bank.User;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Класс описывает работу простого банковского сервиса
@@ -71,10 +68,11 @@ public class BankService {
      * @return счет с заданным реквизитом или null, если не удалось его найти
      */
     public Account findByRequisite(String passport, String requisite) {
-        return users.get(findByPassport(passport)).stream()
-                .filter(account -> account.getRequisite().equals(requisite))
-                .findFirst()
-                .orElse(null);
+        return users.get(findByPassport(passport)) == null ? null : users.get(findByPassport(passport)).stream()
+                                                                    .filter(account ->
+                                                                            account.getRequisite().equals(requisite))
+                                                                    .findFirst()
+                                                                    .orElse(null);
     }
 
     /**
