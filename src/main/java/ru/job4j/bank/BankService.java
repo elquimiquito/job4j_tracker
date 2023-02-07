@@ -58,12 +58,10 @@ public class BankService {
      * @return пользователя с заданным паспортом или null, если не удалось его найти
      */
     public User findByPassport(String passport) {
-        for (User user : users.keySet()) {
-            if (user.getPassport().equals(passport)) {
-                return user;
-            }
-        }
-        return null;
+        return users.keySet().stream()
+                .filter(user -> user.getPassport().equals(passport))
+                .findFirst()
+                .orElse(null);
     }
 
     /**
@@ -73,20 +71,15 @@ public class BankService {
      * @return счет с заданным реквизитом или null, если не удалось его найти
      */
     public Account findByRequisite(String passport, String requisite) {
-        List<Account> accounts = users.get(findByPassport(passport));
-        if (accounts != null) {
-            for (Account account : accounts) {
-                if (account.getRequisite().equals(requisite)) {
-                    return account;
-                }
-            }
-        }
-        return null;
+        return users.get(findByPassport(passport)).stream()
+                .filter(account -> account.getRequisite().equals(requisite))
+                .findFirst()
+                .orElse(null);
     }
 
     /**
      * Метод переводит деньги с одного счета на другой
-     * @param srcPassport паспорт пользователя,который переводит деньги
+     * @param srcPassport паспорт пользователя, который переводит деньги
      * @param srcRequisite реквизит счета, с которого переводят деньги
      * @param destPassport паспорт пользователя, которому переводят деньги
      * @param destRequisite реквизит счета, на который переводят деньги
