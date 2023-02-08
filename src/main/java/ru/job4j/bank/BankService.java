@@ -68,11 +68,13 @@ public class BankService {
      * @return счет с заданным реквизитом или null, если не удалось его найти
      */
     public Account findByRequisite(String passport, String requisite) {
-        return users.get(findByPassport(passport)) == null ? null : users.get(findByPassport(passport)).stream()
-                                                                    .filter(account ->
-                                                                            account.getRequisite().equals(requisite))
-                                                                    .findFirst()
-                                                                    .orElse(null);
+        var accounts = users.getOrDefault(findByPassport(passport),
+                List.of(new Account("Stub", 0)));
+        return accounts.stream()
+                .filter(account ->
+                        account.getRequisite().equals(requisite))
+                .findFirst()
+                .orElse(null);
     }
 
     /**
